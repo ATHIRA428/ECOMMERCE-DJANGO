@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="cart-page">
+    <div class="container">
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="product-h">Product</th>
+                        <th>Price</th>
+                        <th class="quan">Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td class="product-col">
+                            <img src="{{ item.product.product_image.url }}" alt="">
+                            <div class="p-title">
+                                <h5>{{ item.product.product_name }}</h5>
+                            </div>
+                        </td>
+                        <td class="price-col">{{ item.product.product_price }}</td>
+                        <td class="quantity-col">
+                            <div class="pro-qty">
+                                <a href="{% url 'reduce_cart' item.product.id %}">
+                                    <button class="qty-btn qty-minus">-</button>
+                                </a>
+                                <input type="number" value="{{ item.quantity }}" readonly>
+                                <a href="{% url 'add_cart' item.product.id %}">
+                                    <button class="qty-btn qty-plus">+</button>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="total">{{item.total_price }}</td>
+                        <td class="remove-col">
+                            <a href="{% url 'reduce_cart' item.id %}">
+                                <i class="fa fa-close"></i>
+                            </a>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="cart-btn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="total-cost">
+                        <h6>Total <span id="cart-total">${{ total_cost }}</span></h6>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4 card-right">
+                    <a href="checkout" class="site-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ {% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="cart-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>Your Cart</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-th">Product</th>
+                                    <th class="quy-th">Quantity</th>
+                                    <th class="total-th">Total</th>
+                                    <th class="remove-th"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart_items %}
+                                <tr>
+                                    <td class="product-col">
+                                        <img src="{{ item.product.product_image.url }}" alt="{{ item.product.product_name }}">
+                                        <div class="pc-title">
+                                            <h4>{{ item.product.product_name }}</h4>
+                                            <p class="product-price" data-item-id="{{ item.id }}">${{ item.product.product_price }}</p>
+                                        </div>
+                                    </td>
+                                    <td class="quy-col">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <button class="qty-btn qty-minus" data-item-id="{{ item.id }}">-</button>
+                                                <input type="number" value="{{ item.quantity }}" data-item-id="{{ item.id }}" readonly>
+                                                <button class="qty-btn qty-plus" data-item-id="{{ item.id }}">+</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="total-col">
+                                        <td class="total-col"><h4 class="item-total" data-item-id="{{ item.id }}">${{ item.product.product_price }}</h4></td> 
+
+                                    </td>
+                                      
+
+
+
+                                    <td class="remove-col">
+                                        <a href="{% url 'remove_from_cart' item.id %}">
+                                            <i class="fa fa-close"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="total-cost">
+                        <h6>Total <span id="cart-total">${{ total_cost }}</span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 card-right">
+                <a href="{% url 'checkout' %}" class="site-btn">Proceed to checkout</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Increment button
+        $('.qty-plus').on('click', function() {
+            var itemId = $(this).data('item-id');
+            var inputElement = $('input[data-item-id="' + itemId + '"]');
+            var quantity = parseInt(inputElement.val());
+            inputElement.val(quantity + 1);
+            updateItemTotal(itemId);
+            updateCartTotal();
+        });
+
+        // Decrement button
+        $('.qty-minus').on('click', function() {
+            var itemId = $(this).data('item-id');
+            var inputElement = $('input[data-item-id="' + itemId + '"]');
+            var quantity = parseInt(inputElement.val());
+            if (quantity > 1) {
+                inputElement.val(quantity - 1);
+                updateItemTotal(itemId);
+                updateCartTotal();
+            }
+        });
+
+        // Update item total price
+        function updateItemTotal(itemId) {
+            var inputElement = $('input[data-item
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="pro-qty">
+                                <button class="qty-btn qty-minus" data-item-id="{{ item.id }}">-</button>
+                                <input type="number" value="{{ item.quantity }}" data-item-id="{{ item.id }}" readonly>
+                                <button class="qty-btn qty-plus" data-item-id="{{ item.id }}">+</button>
+                            </div>
+
+
+
+
+
+
+<div class="col-lg-5 offset-lg-1 text-left text-lg-right">
+                    <div class="site-btn update-btn">Proceed to Checkout</div>
+                </div>
+
+
+
+
+
+
+
+
+
+ {% endcomment %}
